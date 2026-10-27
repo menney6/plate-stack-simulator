@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafeteria Plate Dispenser - LIFO Stack Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <h1>🍽️ The Cafeteria Plate Dispenser</h1>
+      <p class="subtitle">
+        Interactive real-world demonstration of the <strong>Stack Data Structure (Last-In, First-Out - LIFO)</strong>
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="main-layout">
+    <!-- Left Panel: Dispenser Simulation Stage -->
+    <section class="card simulation-card">
+      <div class="card-header">
+        <h2>Buffet Line Dispenser</h2>
+        <div class="capacity-badge" id="capacityBadge">Plates: 0 / 7</div>
+      </div>
+
+      <!-- Alert Banners for Overflow & Underflow -->
+      <div id="statusAlert" class="status-alert hidden"></div>
+
+      <!-- Physical Dispenser Visual Container -->
+      <div class="dispenser-stage">
+        <!-- Top Tube Opening indicator -->
+        <div class="tube-opening">
+          <span>⬆️ PUSH / POP HERE (Top of Stack)</span>
+        </div>
+
+        <!-- The Dispenser Tube Barrel -->
+        <div class="dispenser-tube">
+          <div class="plates-stack" id="platesStack">
+            <!-- Dynamic plates rendered by app.js -->
+          </div>
+
+          <!-- Spring Mechanism Platform -->
+          <div class="spring-platform" id="springPlatform">
+            <div class="platform-bar"></div>
+            <!-- SVG Spring that compresses and stretches -->
+            <svg class="spring-svg" id="springSvg" viewBox="0 0 100 120" preserveAspectRatio="none">
+              <path id="springPath" d="M 50 0 L 20 15 L 80 30 L 20 45 L 80 60 L 20 75 L 80 90 L 20 105 L 50 120" 
+                    fill="none" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="base-stand"></div>
+          </div>
+        </div>
+
+        <div class="tube-base-label">
+          <span>⬇️ Dispenser Base (First Plate In sits here)</span>
+        </div>
+      </div>
+
+      <!-- Action Controls -->
+      <div class="control-panel">
+        <div class="action-buttons">
+          <button id="pushBtn" class="btn btn-push">
+            📥 Clean & Stack Plate (PUSH)
+          </button>
+          <button id="popBtn" class="btn btn-pop">
+            🍽️ Customer Takes Plate (POP)
+          </button>
+          <button id="peekBtn" class="btn btn-peek">
+            👀 Inspect Top Plate (PEEK)
+          </button>
+          <button id="illegalBtn" class="btn btn-warning" title="Try taking a plate from the bottom to test LIFO rule">
+            🚫 Try Grab Bottom Plate
+          </button>
+        </div>
+
+        <div class="preset-buttons">
+          <span class="preset-label">⚡ Quick Demos:</span>
+          <button id="rushHourBtn" class="btn btn-sm">🏃 Buffet Rush Hour Demo</button>
+          <button id="fillFullBtn" class="btn btn-sm">📦 Fill to Max (Test Overflow)</button>
+          <button id="resetBtn" class="btn btn-sm btn-ghost">🔄 Reset Dispenser</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel: Memory & State Inspector -->
+    <section class="card inspector-card">
+      <div class="card-header">
+        <h2>Stack Memory Inspector</h2>
+        <span class="badge" id="topPointerBadge">TOP = -1 (Empty)</span>
+      </div>
+
+      <!-- State Meters -->
+      <div class="memory-grid">
+        <div class="stat-box">
+          <span class="stat-label">Size</span>
+          <span class="stat-value" id="statSize">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Capacity</span>
+          <span class="stat-value">7</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Top Plate ID</span>
+          <span class="stat-value" id="statTop">None</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Is Empty?</span>
+          <span class="stat-value" id="statEmpty">true</span>
+        </div>
+      </div>
+
+      <!-- Data Array Representation -->
+      <div class="array-view-box">
+        <h3>Memory Array <code>plates[7]</code>:</h3>
+        <div class="array-slots" id="arraySlots">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Real-Time Activity Log -->
+      <div class="activity-log-box">
+        <h3>📋 Operations Console:</h3>
+        <ul id="consoleLog" class="log-list">
+          <li class="log-item log-init">Dispenser loaded. Ready for clean plates.</li>
+        </ul>
+      </div>
+
+      <!-- Academic Theory Box -->
+      <div class="theory-box">
+        <h3>💡 Why This Real-World Application Demands a Stack:</h3>
+        <ul>
+          <li><strong>Physical Single Access Point:</strong> Plates are enclosed inside a spring-loaded cylinder. You can only enter and leave through the <em>top</em>.</li>
+          <li><strong>LIFO Guarantee:</strong> The most recently washed plate placed on top is the first one served.</li>
+          <li><strong>Zero Spillage:</strong> Trying to take an arbitrary plate from the bottom would break the stack, which is why array random access $O(1)$ is physically impossible here.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Data Structures Assignment: Real-World Stack Application | Spring-Loaded Cafeteria Dispenser Model</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
